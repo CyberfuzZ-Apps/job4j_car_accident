@@ -1,5 +1,7 @@
 # Job4j_car_accident
 
+[![Java CI with Maven](https://github.com/CyberfuzZ-Apps/job4j_car_accident/actions/workflows/maven.yml/badge.svg)](https://github.com/CyberfuzZ-Apps/job4j_car_accident/actions/workflows/maven.yml)
+
 ## О проекте:
 
 Проект - Автонарушители.
