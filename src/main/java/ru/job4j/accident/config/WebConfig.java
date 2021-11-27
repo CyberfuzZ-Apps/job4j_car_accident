@@ -25,4 +25,5 @@ public class WebConfig {
         bean.setSuffix(".jsp");
         return bean;
     }
+
 }
