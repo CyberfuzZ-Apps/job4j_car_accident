@@ -3,6 +3,7 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  * @version 1.0
  */
 @Repository
-public class AccidentMem implements Store {
+public class AccidentMem implements Store<Accident> {
 
     private final Map<Integer, Accident> accidents = new HashMap<>();
 
@@ -43,7 +44,7 @@ public class AccidentMem implements Store {
     }
 
     @Override
-    public Map<Integer, Accident> findAll() {
-        return accidents;
+    public Collection<Accident> findAll() {
+        return accidents.values();
     }
 }

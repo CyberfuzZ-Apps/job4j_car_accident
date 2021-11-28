@@ -2,6 +2,7 @@ package ru.job4j.accident.repository;
 
 import ru.job4j.accident.model.Accident;
 
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -10,12 +11,12 @@ import java.util.Map;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-public interface Store {
+public interface Store<T> {
 
-    void add(Accident accident);
+    void add(T t);
 
-    Accident get(int id);
+    T get(int id);
 
-    Map<Integer, Accident> findAll();
+    Collection<T> findAll();
 
 }

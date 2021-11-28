@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.service.AccidentService;
 
-import java.util.Map;
+import java.util.Collection;
 
 /**
  * Класс IndexControl
@@ -25,8 +25,8 @@ public class IndexControl {
 
     @GetMapping("/")
     public String index(Model model) {
-        Map<Integer, Accident> accidentMap = service.findAllAccident();
-        model.addAttribute("accidentMap", accidentMap);
+        Collection<Accident> accidents = service.findAllAccidents();
+        model.addAttribute("accidents", accidents);
         return "index";
     }
 }

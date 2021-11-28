@@ -46,17 +46,17 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${accidentMap}" var="accident">
+    <c:forEach items="${accidents}" var="accident">
         <tr>
             <th scope="row"></th>
             <td>
-                <c:out value="${accident.value.name}"/>
+                <c:out value="${accident.name}"/>
             </td>
             <td>
-                <c:out value="${accident.value.text}"/>
+                <c:out value="${accident.text}"/>
             </td>
             <td>
-                <c:out value="${accident.value.address}"/>
+                <c:out value="${accident.address}"/>
             </td>
         </tr>
     </c:forEach>

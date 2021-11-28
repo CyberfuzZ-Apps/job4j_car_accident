@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.Store;
 
-import java.util.Map;
+import java.util.Collection;
 
 /**
  * Класс AccidentService
@@ -15,9 +15,9 @@ import java.util.Map;
 @Service
 public class AccidentService {
 
-    private final Store store;
+    private final Store<Accident> store;
 
-    public AccidentService(Store store) {
+    public AccidentService(Store<Accident> store) {
         this.store = store;
     }
 
@@ -29,7 +29,7 @@ public class AccidentService {
         return store.get(id);
     }
 
-    public Map<Integer, Accident> findAllAccident() {
+    public Collection<Accident> findAllAccidents() {
         return store.findAll();
     }
 }
