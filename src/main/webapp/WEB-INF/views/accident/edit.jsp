@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<form  action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
+<form action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
     <table style="font-size: larger">
         <tr>
             <td>Название:</td>
@@ -19,6 +19,20 @@
                 <input type='text' name='name' placeholder="Введите название"
                        value="${accident.name}" required>
             </td>
+        </tr>
+        <tr>
+            <td>Тип:</td>
+            <td>
+                <select name="type.id">
+                    <c:forEach var="type" items="${types}">
+                        <c:if test="${accident.type.id == type.id}">
+                            <option value="${type.id}" selected>${type.name}</option>
+                        </c:if>
+                        <c:if test="${accident.type.id != type.id}">
+                            <option value="${type.id}">${type.name}</option>
+                        </c:if>
+                    </c:forEach>
+                </select>
         </tr>
         <tr>
             <td>Описание:</td>

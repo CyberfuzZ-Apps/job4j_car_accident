@@ -2,6 +2,7 @@ package ru.job4j.accident.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,13 +27,13 @@ public class AccidentMem implements Store<Accident> {
                 "Проезд на красный",
                 "Автомобиль Porsche 911, регистрационный номер А000АА проехал перекресток "
                         + "на красный сигнал светофора.",
-                "Москва, Ленина, 25"));
+                "Москва, Ленина, 25", AccidentType.of(1, "Две машины")));
         accidents.put(2, new Accident(
                 2,
                 "Не уступил пешеходу",
                 "Автомобиль Audi Q7, регистрационный номер Б111ББ проехал пешеходный переход "
                         + "на большой скорости не уступив дорогу пешеходу.",
-                "Москва, Герцена, 3"));
+                "Москва, Герцена, 3", AccidentType.of(2, "Машина и пешеход")));
     }
 
     @Override

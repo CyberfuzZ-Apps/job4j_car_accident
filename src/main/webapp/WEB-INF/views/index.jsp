@@ -31,10 +31,11 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <td style="font-weight: bold"></td>
-        <td style="font-weight: bold">Название</td>
-        <td style="font-weight: bold">Описание</td>
-        <td style="font-weight: bold">Адрес</td>
+        <td></td>
+        <td style="font-weight: bolder">Название</td>
+        <td style="font-weight: bolder">Тип</td>
+        <td style="font-weight: bolder">Описание</td>
+        <td style="font-weight: bolder">Адрес</td>
     </tr>
     </thead>
     <tbody>
@@ -56,8 +57,11 @@
                     </svg>
                 </a>
             </td>
-            <td>
+            <td style="font-weight: bold">
                 <c:out value="${accident.name}"/>
+            </td>
+            <td style="font-style: italic">
+                <c:out value="${accident.type.name}"/>
             </td>
             <td>
                 <c:out value="${accident.text}"/>
