@@ -42,6 +42,15 @@ public class AccidentMem implements Store<Accident> {
     }
 
     @Override
+    public boolean update(int id, Accident accident) {
+        Accident rsl = get(id);
+        if (rsl == null) {
+            return false;
+        }
+        return accidents.replace(id, accident) != null;
+    }
+
+    @Override
     public Accident get(int id) {
         return accidents.get(id);
     }

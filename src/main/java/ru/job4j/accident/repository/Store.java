@@ -15,6 +15,8 @@ public interface Store<T> {
 
     void add(T t);
 
+    boolean update(int id, T t);
+
     T get(int id);
 
     Collection<T> findAll();

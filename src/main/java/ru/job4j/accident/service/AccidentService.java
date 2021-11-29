@@ -25,6 +25,10 @@ public class AccidentService {
         store.add(accident);
     }
 
+    public boolean updateAccident(int id, Accident accident) {
+        return store.update(id, accident);
+    }
+
     public Accident getAccident(int id) {
         return store.get(id);
     }
