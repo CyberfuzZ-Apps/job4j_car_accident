@@ -6,6 +6,7 @@ import ru.job4j.accident.model.Accident;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Класс AccidentMem - хранилище инцидентов.
@@ -17,6 +18,7 @@ import java.util.Map;
 public class AccidentMem implements Store<Accident> {
 
     private final Map<Integer, Accident> accidents = new HashMap<>();
+    private final AtomicInteger count = new AtomicInteger(3);
 
     public AccidentMem() {
         accidents.put(1, new Accident(
@@ -35,6 +37,7 @@ public class AccidentMem implements Store<Accident> {
 
     @Override
     public void add(Accident accident) {
+        accident.setId(count.getAndIncrement());
         accidents.put(accident.getId(), accident);
     }
 
