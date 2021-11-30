@@ -29,6 +29,15 @@
                 </select>
         </tr>
         <tr>
+            <td>Статьи:</td>
+            <td>
+                <select name="rIds" multiple>
+                    <c:forEach var="rule" items="${rules}" >
+                        <option value="${rule.id}">${rule.name}</option>
+                    </c:forEach>
+                </select>
+        </tr>
+        <tr>
             <td>Описание:</td>
             <td>
                 <textarea name="text" rows="5" placeholder="Подробное описание инцидента" required></textarea>

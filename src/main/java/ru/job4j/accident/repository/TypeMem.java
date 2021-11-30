@@ -18,18 +18,10 @@ public class TypeMem implements Store<Type> {
 
     private final Map<Integer, Type> typeMap = new HashMap<>();
 
-    private TypeMem() {
+    public TypeMem() {
         typeMap.put(1, Type.of(1, "Две машины"));
         typeMap.put(2, Type.of(2, "Машина и пешеход"));
         typeMap.put(3, Type.of(3, "Машина и велосипед"));
-    }
-
-    private static final class Lazy {
-        private static final TypeMem INST = new TypeMem();
-    }
-
-    public static TypeMem instOf() {
-        return Lazy.INST;
     }
 
     @Override

@@ -2,11 +2,13 @@ package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.model.Type;
 import ru.job4j.accident.repository.Store;
-import ru.job4j.accident.repository.TypeMem;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Класс AccidentService
@@ -17,35 +19,52 @@ import java.util.Collection;
 @Service
 public class AccidentService {
 
-    private final Store<Accident> store;
+    private final Store<Accident> accidentStore;
+    private final Store<Type> typeStore;
+    private final Store<Rule> ruleStore;
 
-    public AccidentService(Store<Accident> store) {
-        this.store = store;
+    public AccidentService(Store<Accident> accidentStore, Store<Type> typeStore, Store<Rule> ruleStore) {
+        this.accidentStore = accidentStore;
+        this.typeStore = typeStore;
+        this.ruleStore = ruleStore;
     }
 
-    public void saveOrUpdateAccident(Accident accident) {
+    public void saveOrUpdateAccident(Accident accident, String[] ruleIds) {
+        Set<Rule> rules = new HashSet<>();
+        for (String id : ruleIds) {
+            rules.add(getRule(Integer.parseInt(id)));
+        }
+        accident.setRules(rules);
         int typeId = accident.getType().getId();
         accident.setType(getType(typeId));
         if (accident.getId() == 0) {
-            store.save(accident);
+            accidentStore.save(accident);
         } else {
-            store.update(accident.getId(), accident);
+            accidentStore.update(accident.getId(), accident);
         }
     }
 
     public Accident getAccident(int id) {
-        return store.get(id);
+        return accidentStore.get(id);
     }
 
     public Collection<Accident> findAllAccidents() {
-        return store.findAll();
+        return accidentStore.findAll();
     }
 
     public Type getType(int id) {
-        return TypeMem.instOf().get(id);
+        return typeStore.get(id);
     }
 
     public Collection<Type> findAllTypes() {
-        return TypeMem.instOf().findAll();
+        return typeStore.findAll();
+    }
+
+    public Rule getRule(int id) {
+        return ruleStore.get(id);
+    }
+
+    public Collection<Rule> findAllRules() {
+        return ruleStore.findAll();
     }
 }
