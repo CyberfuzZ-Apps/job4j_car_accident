@@ -43,5 +43,4 @@ public class TypeMem implements Store<Type> {
     public Collection<Type> findAll() {
         return typeMap.values();
     }
-
 }
