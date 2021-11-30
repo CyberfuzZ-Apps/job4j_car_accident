@@ -43,9 +43,7 @@ public class AccidentControl {
     }
 
     @PostMapping("/save")
-    public String save(
-            @RequestParam("id") int id,
-            @ModelAttribute Accident accident) {
+    public String save(@ModelAttribute Accident accident) {
         List<AccidentType> typeList = getAccidentTypes();
         for (AccidentType type : typeList) {
             if (type.getId() == accident.getType().getId()) {
@@ -53,11 +51,7 @@ public class AccidentControl {
                 break;
             }
         }
-        if (id != 0) {
-            service.updateAccident(id, accident);
-        } else {
-            service.addAccident(accident);
-        }
+        service.saveOrUpdateAccident(accident);
         return "redirect:/";
     }
 

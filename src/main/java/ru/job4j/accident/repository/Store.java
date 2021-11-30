@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface Store<T> {
 
-    void add(T t);
+    void save(T t);
 
     boolean update(int id, T t);
 

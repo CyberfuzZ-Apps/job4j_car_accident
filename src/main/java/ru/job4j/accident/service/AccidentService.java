@@ -21,12 +21,12 @@ public class AccidentService {
         this.store = store;
     }
 
-    public void addAccident(Accident accident) {
-        store.add(accident);
-    }
-
-    public boolean updateAccident(int id, Accident accident) {
-        return store.update(id, accident);
+    public void saveOrUpdateAccident(Accident accident) {
+        if (accident.getId() == 0) {
+            store.save(accident);
+        } else {
+            store.update(accident.getId(), accident);
+        }
     }
 
     public Accident getAccident(int id) {

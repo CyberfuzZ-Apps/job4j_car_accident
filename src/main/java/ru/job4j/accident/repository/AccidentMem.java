@@ -37,7 +37,7 @@ public class AccidentMem implements Store<Accident> {
     }
 
     @Override
-    public void add(Accident accident) {
+    public void save(Accident accident) {
         accident.setId(count.getAndIncrement());
         accidents.put(accident.getId(), accident);
     }
