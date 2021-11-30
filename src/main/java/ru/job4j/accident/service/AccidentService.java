@@ -2,7 +2,9 @@ package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.Type;
 import ru.job4j.accident.repository.Store;
+import ru.job4j.accident.repository.TypeMem;
 
 import java.util.Collection;
 
@@ -22,6 +24,8 @@ public class AccidentService {
     }
 
     public void saveOrUpdateAccident(Accident accident) {
+        int typeId = accident.getType().getId();
+        accident.setType(getType(typeId));
         if (accident.getId() == 0) {
             store.save(accident);
         } else {
@@ -35,5 +39,13 @@ public class AccidentService {
 
     public Collection<Accident> findAllAccidents() {
         return store.findAll();
+    }
+
+    public Type getType(int id) {
+        return TypeMem.instOf().get(id);
+    }
+
+    public Collection<Type> findAllTypes() {
+        return TypeMem.instOf().findAll();
     }
 }

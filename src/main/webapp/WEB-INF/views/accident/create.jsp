@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<form  action="<c:url value='/save?id=0'/>" method='POST'>
+<form  action="<c:url value='/save'/>" method='POST'>
     <table style="font-size: larger">
         <tr>
             <td>Название:</td>
