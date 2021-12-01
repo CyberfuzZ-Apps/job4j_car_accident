@@ -31,8 +31,8 @@ public class RuleMem implements Store<Rule> {
     }
 
     @Override
-    public void update(int id, Rule rule) {
-        ruleMap.replace(id, rule);
+    public void update(Rule rule) {
+        ruleMap.replace(rule.getId(), rule);
     }
 
     @Override

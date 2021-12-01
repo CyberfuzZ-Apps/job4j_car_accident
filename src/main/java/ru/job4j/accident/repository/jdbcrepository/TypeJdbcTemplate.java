@@ -29,8 +29,8 @@ public class TypeJdbcTemplate implements Store<Type> {
     }
 
     @Override
-    public void update(int id, Type type) {
-        jdbc.update("UPDATE types SET name = ? WHERE id = ?", type.getName(), id);
+    public void update(Type type) {
+        jdbc.update("UPDATE types SET name = ? WHERE id = ?", type.getName(), type.getId());
     }
 
     @Override

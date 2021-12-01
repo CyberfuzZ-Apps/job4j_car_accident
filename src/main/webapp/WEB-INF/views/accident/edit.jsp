@@ -23,7 +23,7 @@
         <tr>
             <td>Тип:</td>
             <td>
-                <select name="type.id">
+                <select name="type.id" required>
                     <c:forEach var="type" items="${types}">
                         <c:if test="${accident.type.id == type.id}">
                             <option value="${type.id}" selected>${type.name}</option>
@@ -37,7 +37,7 @@
         <tr>
             <td>Статьи:</td>
             <td>
-                <select name="rIds" multiple>
+                <select name="rIds" multiple required>
                     <c:forEach var="rule" items="${rules}">
                             <c:if test="${accident.rules.contains(rule)}">
                                 <option value="${rule.id}" selected>${rule.name}</option>

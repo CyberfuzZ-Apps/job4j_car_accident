@@ -1,5 +1,6 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,13 +10,22 @@ import java.util.Set;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
+@Entity
+@Table(name = "accident")
 public class Accident {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String text;
     private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private Type type;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Rule> rules;
 
     public Accident() {

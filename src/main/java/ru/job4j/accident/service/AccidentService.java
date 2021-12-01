@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Класс AccidentService
+ * Класс AccidentService - сервис для обработки инцидентов в хранилище.
  *
  * @author Evgeniy Zaytsev
  * @version 1.0
@@ -25,9 +25,9 @@ public class AccidentService {
     private final Store<Rule> ruleStore;
 
     public AccidentService(
-            @Qualifier("accidentJdbcTemplate") Store<Accident> accidentStore,
-            @Qualifier("typeJdbcTemplate") Store<Type> typeStore,
-            @Qualifier("ruleJdbcTemplate") Store<Rule> ruleStore) {
+            @Qualifier("accidentHibernate") Store<Accident> accidentStore,
+            @Qualifier("typeHibernate") Store<Type> typeStore,
+            @Qualifier("ruleHibernate") Store<Rule> ruleStore) {
         this.accidentStore = accidentStore;
         this.typeStore = typeStore;
         this.ruleStore = ruleStore;
@@ -44,7 +44,7 @@ public class AccidentService {
         if (accident.getId() == 0) {
             accidentStore.save(accident);
         } else {
-            accidentStore.update(accident.getId(), accident);
+            accidentStore.update(accident);
         }
     }
 
@@ -70,5 +70,9 @@ public class AccidentService {
 
     public Collection<Rule> findAllRules() {
         return ruleStore.findAll();
+    }
+
+    public void deleteAccident(int id) {
+        accidentStore.delete(id);
     }
 }

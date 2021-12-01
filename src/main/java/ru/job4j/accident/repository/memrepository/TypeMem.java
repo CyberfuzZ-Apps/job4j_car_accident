@@ -31,8 +31,8 @@ public class TypeMem implements Store<Type> {
     }
 
     @Override
-    public void update(int id, Type type) {
-        typeMap.replace(id, type);
+    public void update(Type type) {
+        typeMap.replace(type.getId(), type);
     }
 
     @Override

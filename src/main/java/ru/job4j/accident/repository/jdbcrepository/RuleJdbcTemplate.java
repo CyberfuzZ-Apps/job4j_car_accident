@@ -29,8 +29,8 @@ public class RuleJdbcTemplate implements Store<Rule> {
     }
 
     @Override
-    public void update(int id, Rule rule) {
-        jdbc.update("UPDATE rules SET name = ? WHERE id = ?", rule.getName(), id);
+    public void update(Rule rule) {
+        jdbc.update("UPDATE rules SET name = ? WHERE id = ?", rule.getName(), rule.getId());
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface Store<T> {
 
     void save(T t);
 
-    void update(int id, T t);
+    void update(T t);
 
     T get(int id);
 

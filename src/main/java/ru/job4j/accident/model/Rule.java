@@ -1,5 +1,6 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -8,8 +9,12 @@ import java.util.Objects;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
+@Entity
+@Table(name = "rules")
 public class Rule {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 

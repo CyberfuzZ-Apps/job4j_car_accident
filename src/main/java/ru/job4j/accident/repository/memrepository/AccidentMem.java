@@ -45,12 +45,12 @@ public class AccidentMem implements Store<Accident> {
     }
 
     @Override
-    public void update(int id, Accident accident) {
-        Accident rsl = get(id);
+    public void update(Accident accident) {
+        Accident rsl = get(accident.getId());
         if (rsl == null) {
             return;
         }
-        accidents.replace(id, accident);
+        accidents.replace(accident.getId(), accident);
     }
 
     @Override

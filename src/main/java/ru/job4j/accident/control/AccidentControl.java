@@ -48,4 +48,10 @@ public class AccidentControl {
         return "accident/edit";
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") int id) {
+        service.deleteAccident(id);
+        return "redirect:/";
+    }
+
 }

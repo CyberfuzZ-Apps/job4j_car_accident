@@ -43,28 +43,30 @@ public class AccidentJdbcTemplate implements Store<Accident> {
             return ps;
         }, keyHolder);
         int generatedAccidentId = Objects.requireNonNull(keyHolder.getKey()).intValue();
-        linkRulesToAccidentInDB(generatedAccidentId, accident);
+        accident.setId(generatedAccidentId);
+        linkRulesToAccidentInDB(accident);
     }
 
     @Override
-    public void update(int id, Accident accident) {
+    public void update(Accident accident) {
         jdbc.update(
                 "UPDATE accident SET name = ?, text = ?, address = ?, type_id = ? WHERE id = ?",
                 accident.getName(), accident.getText(), accident.getAddress(),
-                accident.getType().getId(), id);
-        jdbc.update("DELETE FROM accident_rules WHERE accident_id = ?", id);
-        linkRulesToAccidentInDB(id, accident);
+                accident.getType().getId(), accident.getId());
+        jdbc.update("DELETE FROM accident_rules WHERE accident_id = ?", accident.getId());
+        linkRulesToAccidentInDB(accident);
     }
 
-    private void linkRulesToAccidentInDB(int id, Accident accident) {
+    private void linkRulesToAccidentInDB(Accident accident) {
         for (Rule rule : accident.getRules()) {
             jdbc.update("INSERT INTO accident_rules (accident_id, rules_id) VALUES (?, ?)",
-                    id, rule.getId());
+                    accident.getId(), rule.getId());
         }
     }
 
     @Override
     public void delete(int id) {
+        jdbc.update("DELETE FROM accident_rules WHERE accident_id = ?", id);
         jdbc.update("DELETE FROM accident WHERE id = ?", id);
     }
 
