@@ -1,7 +1,8 @@
-package ru.job4j.accident.repository;
+package ru.job4j.accident.repository.memrepository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.Store;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -30,13 +31,18 @@ public class RuleMem implements Store<Rule> {
     }
 
     @Override
-    public boolean update(int id, Rule rule) {
-        return ruleMap.replace(id, rule) != null;
+    public void update(int id, Rule rule) {
+        ruleMap.replace(id, rule);
     }
 
     @Override
     public Rule get(int id) {
         return ruleMap.get(id);
+    }
+
+    @Override
+    public void delete(int id) {
+        ruleMap.remove(id);
     }
 
     @Override

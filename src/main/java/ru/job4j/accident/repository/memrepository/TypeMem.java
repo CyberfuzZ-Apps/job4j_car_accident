@@ -1,7 +1,8 @@
-package ru.job4j.accident.repository;
+package ru.job4j.accident.repository.memrepository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Type;
+import ru.job4j.accident.repository.Store;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -30,13 +31,18 @@ public class TypeMem implements Store<Type> {
     }
 
     @Override
-    public boolean update(int id, Type type) {
-        return typeMap.replace(id, type) != null;
+    public void update(int id, Type type) {
+        typeMap.replace(id, type);
     }
 
     @Override
     public Type get(int id) {
         return typeMap.get(id);
+    }
+
+    @Override
+    public void delete(int id) {
+        typeMap.remove(id);
     }
 
     @Override

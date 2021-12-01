@@ -1,9 +1,10 @@
-package ru.job4j.accident.repository;
+package ru.job4j.accident.repository.memrepository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.model.Type;
+import ru.job4j.accident.repository.Store;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -44,17 +45,22 @@ public class AccidentMem implements Store<Accident> {
     }
 
     @Override
-    public boolean update(int id, Accident accident) {
+    public void update(int id, Accident accident) {
         Accident rsl = get(id);
         if (rsl == null) {
-            return false;
+            return;
         }
-        return accidents.replace(id, accident) != null;
+        accidents.replace(id, accident);
     }
 
     @Override
     public Accident get(int id) {
         return accidents.get(id);
+    }
+
+    @Override
+    public void delete(int id) {
+        accidents.remove(id);
     }
 
     @Override

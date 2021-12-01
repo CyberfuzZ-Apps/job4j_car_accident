@@ -1,5 +1,6 @@
 package ru.job4j.accident.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
@@ -23,7 +24,10 @@ public class AccidentService {
     private final Store<Type> typeStore;
     private final Store<Rule> ruleStore;
 
-    public AccidentService(Store<Accident> accidentStore, Store<Type> typeStore, Store<Rule> ruleStore) {
+    public AccidentService(
+            @Qualifier("accidentJdbcTemplate") Store<Accident> accidentStore,
+            @Qualifier("typeJdbcTemplate") Store<Type> typeStore,
+            @Qualifier("ruleJdbcTemplate") Store<Rule> ruleStore) {
         this.accidentStore = accidentStore;
         this.typeStore = typeStore;
         this.ruleStore = ruleStore;

@@ -1,12 +1,10 @@
 package ru.job4j.accident.repository;
 
-import ru.job4j.accident.model.Accident;
-
 import java.util.Collection;
-import java.util.Map;
 
 /**
- * Класс Store
+ * Интерфейс Store - определяет методы для работы с хранилищем
+ * (CRUD - Create, Read, Update, Delete).
  *
  * @author Evgeniy Zaytsev
  * @version 1.0
@@ -15,9 +13,11 @@ public interface Store<T> {
 
     void save(T t);
 
-    boolean update(int id, T t);
+    void update(int id, T t);
 
     T get(int id);
+
+    void delete(int id);
 
     Collection<T> findAll();
 
