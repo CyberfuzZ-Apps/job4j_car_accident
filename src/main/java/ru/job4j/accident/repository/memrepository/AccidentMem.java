@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Repository
+/* @Repository */
 public class AccidentMem implements Store<Accident> {
 
     private final Map<Integer, Accident> accidents = new HashMap<>();

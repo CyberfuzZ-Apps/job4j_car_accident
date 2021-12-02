@@ -21,7 +21,7 @@ import java.util.Objects;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Repository
+/* @Repository */
 public class AccidentJdbcTemplate implements Store<Accident> {
 
     private final JdbcTemplate jdbc;

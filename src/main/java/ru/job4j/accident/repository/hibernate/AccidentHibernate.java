@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Repository
+/* @Repository */
 public class AccidentHibernate implements Store<Accident> {
 
     private final SessionFactory sf;

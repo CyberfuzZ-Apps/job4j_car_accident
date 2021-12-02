@@ -14,7 +14,7 @@ import java.util.Collection;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Repository
+/* @Repository */
 public class RuleJdbcTemplate implements Store<Rule> {
 
     private final JdbcTemplate jdbc;

@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Repository
+/* @Repository */
 public class RuleMem implements Store<Rule> {
 
     private final Map<Integer, Rule> ruleMap = new HashMap<>();

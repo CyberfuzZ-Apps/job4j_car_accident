@@ -15,7 +15,7 @@ import java.util.Collection;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Repository
+/* @Repository */
 public class RuleHibernate implements Store<Rule> {
 
     private final SessionFactory sf;

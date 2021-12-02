@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Repository
+/* @Repository */
 public class TypeMem implements Store<Type> {
 
     private final Map<Integer, Type> typeMap = new HashMap<>();

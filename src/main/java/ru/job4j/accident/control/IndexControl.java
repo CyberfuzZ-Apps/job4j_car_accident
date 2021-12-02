@@ -1,10 +1,11 @@
 package ru.job4j.accident.control;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.service.AccidentService;
+import ru.job4j.accident.service.GeneralService;
 
 import java.util.Collection;
 
@@ -17,9 +18,10 @@ import java.util.Collection;
 @Controller
 public class IndexControl {
 
-    private final AccidentService service;
+    private final GeneralService service;
 
-    public IndexControl(AccidentService service) {
+    public IndexControl(
+            @Qualifier("accidentSpringDataService") GeneralService service) {
         this.service = service;
     }
 

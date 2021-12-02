@@ -1,5 +1,6 @@
 package ru.job4j.accident.control;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.service.AccidentService;
+import ru.job4j.accident.service.GeneralService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,9 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class AccidentControl {
 
-    private final AccidentService service;
+    private final GeneralService service;
 
-    public AccidentControl(AccidentService service) {
+    public AccidentControl(
+            @Qualifier("accidentSpringDataService") GeneralService service) {
         this.service = service;
     }
 

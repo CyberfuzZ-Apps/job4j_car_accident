@@ -17,8 +17,8 @@ import java.util.Set;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Service
-public class AccidentService {
+/* @Service */
+public class AccidentService implements GeneralService {
 
     private final Store<Accident> accidentStore;
     private final Store<Type> typeStore;
@@ -33,6 +33,7 @@ public class AccidentService {
         this.ruleStore = ruleStore;
     }
 
+    @Override
     public void saveOrUpdateAccident(Accident accident, String[] ruleIds) {
         Set<Rule> rules = new HashSet<>();
         for (String id : ruleIds) {
@@ -48,30 +49,37 @@ public class AccidentService {
         }
     }
 
+    @Override
     public Accident getAccident(int id) {
         return accidentStore.get(id);
     }
 
+    @Override
     public Collection<Accident> findAllAccidents() {
         return accidentStore.findAll();
     }
 
+    @Override
     public Type getType(int id) {
         return typeStore.get(id);
     }
 
+    @Override
     public Collection<Type> findAllTypes() {
         return typeStore.findAll();
     }
 
+    @Override
     public Rule getRule(int id) {
         return ruleStore.get(id);
     }
 
+    @Override
     public Collection<Rule> findAllRules() {
         return ruleStore.findAll();
     }
 
+    @Override
     public void deleteAccident(int id) {
         accidentStore.delete(id);
     }

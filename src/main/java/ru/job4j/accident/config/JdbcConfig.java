@@ -16,12 +16,14 @@ import javax.sql.DataSource;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
+/*
 @Configuration
 @PropertySource("classpath:app.properties")
 @EnableTransactionManagement
+ */
 public class JdbcConfig {
 
-    @Bean
+    /* @Bean */
     public DataSource ds(@Value("${jdbc.driver}") String driver,
                          @Value("${jdbc.url}") String url,
                          @Value("${jdbc.username}") String username,
@@ -34,7 +36,7 @@ public class JdbcConfig {
         return ds;
     }
 
-    @Bean
+    /* @Bean */
     public JdbcTemplate jdbc(DataSource ds) {
         return new JdbcTemplate(ds);
     }
