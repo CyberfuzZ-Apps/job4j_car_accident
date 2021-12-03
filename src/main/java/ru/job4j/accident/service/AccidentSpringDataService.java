@@ -12,7 +12,8 @@ import ru.job4j.accident.repository.TypeRepository;
 import java.util.*;
 
 /**
- * Класс AccidentSpringDataService
+ * Класс AccidentSpringDataService - сервис для обработки инцидентов
+ * в хранилище с помощью Spring Data JPA.
  *
  * @author Evgeniy Zaytsev
  * @version 1.0
@@ -48,14 +49,12 @@ public class AccidentSpringDataService implements GeneralService {
 
     @Override
     public Accident getAccident(int id) {
-        Optional<Accident> optionalAccident = accidentRepository.findById(id);
-        return optionalAccident.orElse(null);
+        return accidentRepository.findAccidentById(id);
     }
 
     @Override
     public Collection<Accident> findAllAccidents() {
-        Iterable<Accident> accidents = accidentRepository.findAll();
-        return (Collection<Accident>) accidents;
+        return accidentRepository.findAllAccidents();
     }
 
     @Override
