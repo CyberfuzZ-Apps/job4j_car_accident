@@ -28,6 +28,7 @@ public class WebInit implements WebApplicationInitializer {
                 WebConfig.class,
                 /* JdbcConfig.class,
                 HbmConfig.class, */
+                SecurityConfig.class,
                 DataConfig.class
         );
         ac.refresh();
