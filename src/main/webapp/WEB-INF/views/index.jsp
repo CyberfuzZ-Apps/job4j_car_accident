@@ -22,6 +22,10 @@
 
 <h1 align="center">Происшествия</h1>
 
+<div>
+    ${user.username}
+</div>
+
 <br>
 <a href="<c:url value='/create'/>">
     <button class="btn btn-success">Добавить инцидент</button>
