@@ -26,9 +26,9 @@ public class WebInit implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext ac = new AnnotationConfigWebApplicationContext();
         ac.register(
                 WebConfig.class,
-                JdbcConfig.class,
-                HbmConfig.class
-                /* , DataConfig.class */
+                /* JdbcConfig.class,
+                HbmConfig.class, */
+                DataConfig.class
         );
         ac.refresh();
 

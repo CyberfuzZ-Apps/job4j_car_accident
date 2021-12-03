@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Service
+/* @Service */
 public class AccidentService implements GeneralService {
 
     private final Store<Accident> accidentStore;

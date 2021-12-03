@@ -21,7 +21,7 @@ public class IndexControl {
     private final GeneralService service;
 
     public IndexControl(
-            /* @Qualifier("accidentSpringDataService") */
+            @Qualifier("accidentSpringDataService")
                     GeneralService service) {
         this.service = service;
     }

@@ -14,7 +14,7 @@ import java.util.Collection;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Repository
+/* @Repository */
 public class TypeHibernate implements Store<Type> {
 
     private final SessionFactory sf;
