@@ -18,7 +18,7 @@ import java.util.*;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-@Service
+/* @Service */
 @Transactional
 public class AccidentSpringDataService implements GeneralService {
 

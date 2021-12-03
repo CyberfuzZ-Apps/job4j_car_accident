@@ -1,9 +1,7 @@
 package ru.job4j.accident.repository.hibernate;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Type;
 import ru.job4j.accident.repository.Store;
 
@@ -16,7 +14,7 @@ import java.util.Collection;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-/* @Repository */
+@Repository
 public class TypeHibernate implements Store<Type> {
 
     private final SessionFactory sf;
@@ -26,36 +24,37 @@ public class TypeHibernate implements Store<Type> {
     }
 
     @Override
-    @Transactional
     public void save(Type type) {
-        currentSession().save(type);
+        HbmUtils.transaction(sf, session -> session.save(type));
     }
 
     @Override
-    @Transactional
     public void update(Type type) {
-        currentSession().update(type);
+        HbmUtils.transaction(sf, session -> {
+            session.update(type);
+            return type;
+        });
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Type get(int id) {
-        return currentSession().get(Type.class, id);
+        return HbmUtils.transaction(sf, session -> session.get(Type.class, id));
     }
 
     @Override
-    @Transactional
     public void delete(int id) {
-        currentSession().delete(get(id));
+        HbmUtils.transaction(sf, session -> {
+            Type type = session.get(Type.class, id);
+            if (type != null) {
+                session.delete(type);
+            }
+            return null;
+        });
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Collection<Type> findAll() {
-        return currentSession().createQuery("from Type").list();
+        return HbmUtils.transaction(sf, session -> session.createQuery("from Type").list());
     }
 
-    public Session currentSession() {
-        return sf.getCurrentSession();
-    }
 }

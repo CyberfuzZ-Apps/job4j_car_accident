@@ -1,9 +1,7 @@
 package ru.job4j.accident.repository.hibernate;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.Store;
 
@@ -15,7 +13,7 @@ import java.util.Collection;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-/* @Repository */
+@Repository
 public class RuleHibernate implements Store<Rule> {
 
     private final SessionFactory sf;
@@ -25,36 +23,37 @@ public class RuleHibernate implements Store<Rule> {
     }
 
     @Override
-    @Transactional
     public void save(Rule rule) {
-        currentSession().save(rule);
+        HbmUtils.transaction(sf, session -> session.save(rule));
     }
 
     @Override
-    @Transactional
     public void update(Rule rule) {
-        currentSession().update(rule);
+        HbmUtils.transaction(sf, session -> {
+            session.update(rule);
+            return rule;
+        });
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Rule get(int id) {
-        return currentSession().get(Rule.class, id);
+        return HbmUtils.transaction(sf, session -> session.get(Rule.class, id));
     }
 
     @Override
-    @Transactional
     public void delete(int id) {
-        currentSession().delete(get(id));
+        HbmUtils.transaction(sf, session -> {
+            Rule rule = session.get(Rule.class, id);
+            if (rule != null) {
+                session.delete(rule);
+            }
+            return null;
+        });
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Collection<Rule> findAll() {
-        return currentSession().createQuery("from Rule").list();
+        return HbmUtils.transaction(sf, session -> session.createQuery("from Rule").list());
     }
 
-    public Session currentSession() {
-        return sf.getCurrentSession();
-    }
 }

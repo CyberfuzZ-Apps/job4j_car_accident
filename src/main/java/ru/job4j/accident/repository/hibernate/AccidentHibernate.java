@@ -1,9 +1,7 @@
 package ru.job4j.accident.repository.hibernate;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.Store;
@@ -17,7 +15,7 @@ import java.util.Set;
  * @author Evgeniy Zaytsev
  * @version 1.0
  */
-/* @Repository */
+@Repository
 public class AccidentHibernate implements Store<Accident> {
 
     private final SessionFactory sf;
@@ -27,42 +25,49 @@ public class AccidentHibernate implements Store<Accident> {
     }
 
     @Override
-    @Transactional
     public void save(Accident accident) {
-        Session session = currentSession();
-        Set<Rule> rules = accident.getRules();
-        for (Rule rule : rules) {
-            session.refresh(rule);
-        }
-        session.persist(accident);
+        HbmUtils.transaction(sf, session -> {
+            Set<Rule> rules = accident.getRules();
+            for (Rule rule : rules) {
+                session.refresh(rule);
+            }
+            session.persist(accident);
+            return accident;
+        });
     }
 
     @Override
-    @Transactional
     public void update(Accident accident) {
-        currentSession().update(accident);
+        HbmUtils.transaction(sf, session -> {
+            session.update(accident);
+            return accident;
+        });
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Accident get(int id) {
-        return currentSession().get(Accident.class, id);
+        return (Accident) HbmUtils.transaction(sf, session -> session.createQuery(
+                        "select distinct a from Accident a join fetch a.rules where a.id = :id")
+                .setParameter("id", id).uniqueResult());
     }
 
     @Override
-    @Transactional
     public void delete(int id) {
-        currentSession().delete(get(id));
+        HbmUtils.transaction(sf, session -> {
+            Accident accident = (Accident) session.createQuery(
+                            "select distinct a from Accident a join fetch a.rules where a.id = :id")
+                    .setParameter("id", id).uniqueResult();
+            if (accident != null) {
+                session.delete(accident);
+            }
+            return null;
+        });
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Collection<Accident> findAll() {
-        return currentSession().createQuery("from Accident").list();
-    }
-
-    public Session currentSession() {
-        return sf.getCurrentSession();
+        return HbmUtils.transaction(sf, session -> session.createQuery(
+                "select distinct a from Accident a join fetch a.rules").list());
     }
 
 }

@@ -24,7 +24,8 @@ public class AccidentControl {
     private final GeneralService service;
 
     public AccidentControl(
-            @Qualifier("accidentSpringDataService") GeneralService service) {
+            /* @Qualifier("accidentSpringDataService") */
+                    GeneralService service) {
         this.service = service;
     }
 
