@@ -10,5 +10,5 @@ import ru.job4j.accident.model.User;
  * @version 1.0
  */
 public interface UserRepository extends CrudRepository<User, Integer> {
-
+    User findByUsername(String username);
 }

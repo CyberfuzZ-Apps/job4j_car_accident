@@ -1,8 +1,3 @@
-<%--
-  User: Евгений Зайцев
-  Date: 29.11.2021
-  Time: 13:32
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -11,6 +6,17 @@
 </head>
 <body>
 
+<h1>Редактирование происшествия</h1>
+
+<div class="row">
+    <a class="nav-link" href="<c:url value="/"/>">Главная</a>
+    &nbsp;&nbsp;
+    ${user.username}
+
+    <a class="nav-link" href="<c:url value="/logout"/>">Выйти</a>
+</div>
+<br>
+<br>
 <form action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
     <table style="font-size: larger">
         <tr>
@@ -39,12 +45,12 @@
             <td>
                 <select name="rIds" multiple required>
                     <c:forEach var="rule" items="${rules}">
-                            <c:if test="${accident.rules.contains(rule)}">
-                                <option value="${rule.id}" selected>${rule.name}</option>
-                            </c:if>
-                            <c:if test="${!accident.rules.contains(rule)}">
-                                <option value="${rule.id}">${rule.name}</option>
-                            </c:if>
+                        <c:if test="${accident.rules.contains(rule)}">
+                            <option value="${rule.id}" selected>${rule.name}</option>
+                        </c:if>
+                        <c:if test="${!accident.rules.contains(rule)}">
+                            <option value="${rule.id}">${rule.name}</option>
+                        </c:if>
                     </c:forEach>
                 </select>
         </tr>

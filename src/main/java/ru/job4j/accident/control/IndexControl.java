@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.service.GeneralService;
 
@@ -17,6 +18,7 @@ import java.util.Collection;
  * @version 1.0
  */
 @Controller
+@SessionAttributes("user")
 public class IndexControl {
 
     private final GeneralService service;
