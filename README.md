@@ -11,7 +11,7 @@
 
 - Spring:
   - Core
-  - MVC
+  - WebMVC
   - Data JPA
   - Security
 - Hibernate
